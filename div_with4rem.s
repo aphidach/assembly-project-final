@@ -4,9 +4,8 @@ section .data
     div_ANS dq 0
     div_rem dq 0
 
-    msg db "Num "
-    len_msg equ ($-msg)
     dot db "."
+    ENDLINE db "",10
     const10 dq 10
 
 section .text
@@ -43,7 +42,7 @@ div_result:
     ;mov 1's arugment, qword[div_ANS]
     ;mov 2's arugment, qword[div_rem]
     call showresult ;call subroutine to display result 
-endmodule:
+
     pop rbx
     pop rdx
     pop rax
@@ -63,29 +62,38 @@ showresult:
 
     mov rax, qword[div_rem]
     mov rdx, 0
-    call printNumber    
+    call printNumber   
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ENDLINE
+    mov rdx, 1
+    syscall 
     ret
+
 printNumber:
     push rax
     push rdx
     xor rdx, rdx        ;rdx:rax = number
     div qword[const10]  ;rax = quotient, rdx = remainder
     test rax, rax       ;Is quotient zero?
-    je .l1              ;yes, don't display it
+    je .char_convert    
     call printNumber    ;Display the quotient
-.l1:
+.char_convert  :
     lea rax, [rdx+'0']
-    call printCharacter  ;Display the remainder
+    call print_character;Display the remainder
     pop rdx
     pop rax
     ret
 
-printCharacter:
-    push rax
+print_character:
+    push rax            ;push the Character in stack
+
     mov rax, 1
     mov rdi, 1
-    mov rsi, rsp
+    mov rsi, rsp        ;rsi = addressof Character 
     mov rdx, 1
     syscall
-    pop rax
+
+    pop rax 
     ret
