@@ -9,6 +9,7 @@ section .data
 
     div_ANS dq 0
     div_rem dq 0
+    divBy dq 0
 
 section .text
 _start:
@@ -19,9 +20,9 @@ _start:
     syscall
 
     mov rdx, 0
-    mov rax, 7 ;divide 7
-    mov rbx, 5 ;by 5
-    div rbx ;rax = ANS, rdx = rem
+    mov rax, 66 ;divide 66
+    mov rbx, 7 ;by 7
+    div rbx ;rax = 9, rdx = 3
     call div_result ;call subroutine to display result 
 
     mov rax, 60
@@ -31,9 +32,17 @@ _start:
 div_result:
     push rax
     push rdx
+    push rbx
 
     mov qword[div_ANS], rax
     mov qword[div_rem], rdx
+    mov qword[divBy], rbx
+
+    mov rax, rdx ;for find rem by div
+    imul rax, 10000 ;for calculate 4 point floting
+    mov rdx, 0 ; clear rdx for div rax only
+    div rbx ;rax = rem 4 point
+
 
     ;on debug -----------------------------VVVVVV---------------------------------
     mov rax, 1
@@ -47,9 +56,18 @@ div_result:
     mov rsi, err_msg ;should convert to string first :feture on going
     mov rdx, len_err_msg
     syscall
+
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, qword[div_ANS]
+    mov rdx, 2
+    ;call convert
+    syscall
     ;on debug -----------------------------^^^^^^---------------------------------
 
 endmodule:
+    pop rbx
     pop rdx
     pop rax
     ret
@@ -58,8 +76,10 @@ endmodule:
 ;convert 0-9 to string
 convert:
     push rax
-    push rsi
-    push rdi
+    ;push rsi
+    ;push rdi
+
+    mov rax, 0              ; Set initial total to 0
 
     movzx rsi, byte [rdi]   ; Get the current character
     test rsi, rsi           ; Check for \0
@@ -79,7 +99,7 @@ convert:
     jmp convert
 
 error:
-    ; console on error
+    ; console error
     mov rax, 1
     mov rdi, 1
     mov rsi, err_msg
@@ -87,8 +107,8 @@ error:
     syscall            
  
 done:
-    pop rdi
-    pop rsi
+    ;pop rdi
+    ;pop rsi
     pop rax
     ret  
 
