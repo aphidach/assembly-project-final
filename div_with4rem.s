@@ -82,7 +82,7 @@ printNumber:
     push rdx
     xor rdx, rdx        ;rdx:rax = number
     div qword[const10]  ;rax = quotient, rdx = remainder
-    test rax, rax       ;Is quotient zero?
+    test rax, rax       ;== quotient zero?
     je .char_convert    
     call printNumber    ;Display the quotient
 .char_convert  :
