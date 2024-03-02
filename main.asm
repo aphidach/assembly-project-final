@@ -1,7 +1,7 @@
 global _start
 
 section .data
-    msg db "Hello world! type",10
+    msg db "Hello world!",10
     len_msg equ ($-msg)
 
 section .text
