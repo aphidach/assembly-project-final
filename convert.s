@@ -1,11 +1,11 @@
-;convert 0-9 to string
-convert:
-    ;push rax
-    ;push rsi
-    ;push rdi
+global _start
 
+section .data
+section .text
+_start:
     mov rax, 0              ; Set initial total to 0
-
+    call convert
+convert:
     movzx rsi, byte [rdi]   ; Get the current character
     test rsi, rsi           ; Check for \0
     je done
@@ -25,16 +25,14 @@ convert:
 
 error:
     ; console error
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, err_msg
-    mov rdx, len_err_msg
-    syscall            
+    ; mov rax, 1
+    ; mov rdi, 1
+    ; mov rsi, err_msg
+    ; mov rdx, len_err_msg
+    ; syscall           
+    mov rax, -1 
  
 done:
-    ;pop rdi
-    ;pop rsi
-    ;pop rax
     ret  
 
 
