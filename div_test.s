@@ -12,10 +12,10 @@ section .data
 
 section .text
 _start:
-    mov rax,1
-    mov rdi,1
-    mov rsi,msg
-    mov rdx,len_msg
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, msg
+    mov rdx, len_msg
     syscall
 
     mov rdx, 0
@@ -24,8 +24,8 @@ _start:
     div rbx ;rax = ANS, rdx = rem
     call div_result ;call subroutine to display result 
 
-    mov rax,60
-    mov rdi,0
+    mov rax, 60
+    mov rdi, 0
     syscall
 
 div_result:
@@ -36,16 +36,16 @@ div_result:
     mov qword[div_rem], rdx
 
     ;on debug -----------------------------VVVVVV---------------------------------
-    mov rax,1
-    mov rdi,1
+    mov rax, 1
+    mov rdi, 1
     mov rsi, err_msg ;should convert to string first :feture on going
-    mov rdx,len_err_msg
+    mov rdx, len_err_msg
     syscall
 
-    mov rax,1
-    mov rdi,1
+    mov rax, 1
+    mov rdi, 1
     mov rsi, err_msg ;should convert to string first :feture on going
-    mov rdx,len_err_msg
+    mov rdx, len_err_msg
     syscall
     ;on debug -----------------------------^^^^^^---------------------------------
 
@@ -80,10 +80,10 @@ convert:
 
 error:
     ; console on error
-    mov rax,1
-    mov rdi,1
-    mov rsi,err_msg
-    mov rdx,len_err_msg
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, err_msg
+    mov rdx, len_err_msg
     syscall            
  
 done:
