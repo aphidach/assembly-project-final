@@ -80,7 +80,7 @@ showresult:
 printNumber:
     push rax
     push rdx
-    xor rdx, rdx        ;rdx:rax = number
+    xor rdx, rdx        ;clear rdx
     div qword[const10]  ;rax = quotient, rdx = remainder
     test rax, rax       ;== quotient zero?
     je .char_convert    
