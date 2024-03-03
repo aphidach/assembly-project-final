@@ -12,13 +12,19 @@ section .data
     ENDLINE db "",10
     four_zero db "0000",10
 
+extern req_input
+extern print_start_msg
+extern get_numOne
+extern get_numTwo
+extern exit_program
 extern printNumber
 
 section .text
-;
-;
-;
 _start:
+    ;req user input
+    call print_start_msg
+    call get_numOne
+    call get_numTwo
 
     xor rdx, rdx    ;clear rdx for div rax only
     mov rax, 666    ;dividend
@@ -26,9 +32,7 @@ _start:
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
-    mov rax, 60
-    mov rdi, 0
-    syscall
+    call exit_program
 
 div_result:
     push rax
