@@ -24,10 +24,10 @@ section .data
     start_msg db "==== start!!! ===="
     len_msg_start equ ($-start_msg)
 
-    num_one_msg db "Enter Number 1 : "
+    num_one_msg db "Enter Number 1: "
     len_num_one_msg equ ($-num_one_msg)
 
-    num_two_msg db "Enter Number 2 : "
+    num_two_msg db "Enter Number 2: "
     len_num_two_msg equ ($-num_two_msg)
 
     output_msg db "Output : "
