@@ -53,7 +53,6 @@ div_result:
     pop rax
     ret
 
-
 showresult:
     ;console quotient
     mov rax, qword[div_ANS]
