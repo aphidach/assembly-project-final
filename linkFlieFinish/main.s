@@ -22,13 +22,16 @@ extern printNumber
 section .text
 _start:
     ;req user input
-    call print_start_msg
-    call get_numOne
-    call get_numTwo
-
+    call print_start_msg 
+    
+    call get_numOne ;dividend
+    push rax
+    call get_numTwo ;divisor
+    push rax    
+    
+    pop rbx         ;divisor
+    pop rax         ;dividend
     xor rdx, rdx    ;clear rdx for div rax only
-    mov rax, 666    ;dividend
-    mov rbx, 7      ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
