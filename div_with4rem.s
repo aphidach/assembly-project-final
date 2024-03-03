@@ -86,7 +86,7 @@ printNumber:
     je .char_convert    
     call printNumber    ;Display the quotient
 .char_convert  :
-    lea rax, [rdx+'0']
+    lea rax, [rdx + '0']      ;rax = rdx + '0' //number to ascii
     call print_character    ;Display the remainder
     pop rdx
     pop rax
