@@ -43,8 +43,8 @@ div_result:
     mov qword[div_rem], rax
     ;Result  qword[div_ANS].qword[div_rem]
 
-    ;mov 1's arugment, qword[div_ANS]
-    ;mov 2's arugment, qword[div_rem]
+    ;1's arugment is qword[div_ANS]
+    ;2's arugment is qword[div_rem]
     call showresult ;call subroutine to display result 
 
     pop rbx
