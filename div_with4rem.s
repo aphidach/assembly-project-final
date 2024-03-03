@@ -15,9 +15,9 @@ section .data
 section .text
 _start:
     mov rdx, 0
-    mov rax, 66 ;divide
-    mov rbx, 7  ;by
-    div rbx ;rax = quotient, rdx = remainder
+    mov rax, 589    ;dividend
+    mov rbx, 7      ;divisor
+    div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
     mov rax, 60
@@ -37,14 +37,14 @@ div_result:
 
     mov rax, rdx        ;for find rem by div
     imul rax, 10000     ;for calculate 4 point floting
-    mov rdx, 0          ; clear rdx for div rax only
-    div rbx             ;rax = rem 4 point
+    xor rdx, rdx        ;clear rdx for div rax only
+    div rbx             ;rax = remeinder 4 digi
 
     mov qword[div_rem], rax
     ;Result  qword[div_ANS].qword[div_rem]
 
-    ;mov 1's arugment, qword[div_ANS]
-    ;mov 2's arugment, qword[div_rem]
+    ;1's arugment is qword[div_ANS]
+    ;2's arugment is qword[div_rem]
     call showresult ;call subroutine to display result 
 
     pop rbx
@@ -86,7 +86,7 @@ printNumber:
     je .char_convert    
     call printNumber    ;Display the quotient
 .char_convert  :
-    lea rax, [rdx+'0']
+    lea rax, [rdx + '0']      ;rax = rdx + '0' //number to ascii
     call print_character    ;Display the remainder
     pop rdx
     pop rax
