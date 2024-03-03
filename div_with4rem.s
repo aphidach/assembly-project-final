@@ -10,13 +10,14 @@ section .data
 
     dot db "."
     ENDLINE db "",10
+    four_zero db "0000",10
     const10 dq 10
 
 section .text
 _start:
     mov rdx, 0
-    mov rax, 589    ;dividend
-    mov rbx, 7      ;divisor
+    mov rax, 100    ;dividend
+    mov rbx, 4      ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
@@ -67,6 +68,8 @@ showresult:
 
     ;console remainder
     mov rax, qword[div_rem]
+    cmp rax, 0              ;if remainder == 0 jump to console "0000"
+    je .case_zero
     mov rdx, 0
     call printNumber   
 
@@ -74,6 +77,13 @@ showresult:
     mov rdi, STDOUT
     mov rsi, ENDLINE
     mov rdx, 1
+    syscall 
+    ret
+.case_zero
+    mov rax, SYS_write
+    mov rdi, STDOUT
+    mov rsi, four_zero
+    mov rdx, 5
     syscall 
     ret
 
