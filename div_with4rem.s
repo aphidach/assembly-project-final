@@ -15,9 +15,9 @@ section .data
 section .text
 _start:
     mov rdx, 0
-    mov rax, 66 ;divide
-    mov rbx, 7  ;by
-    div rbx ;rax = quotient, rdx = remainder
+    mov rax, 589    ;dividend
+    mov rbx, 7      ;divisor
+    div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
     mov rax, 60
@@ -37,7 +37,7 @@ div_result:
 
     mov rax, rdx        ;for find rem by div
     imul rax, 10000     ;for calculate 4 point floting
-    xor rdx, rdx          ; clear rdx for div rax only
+    xor rdx, rdx        ;clear rdx for div rax only
     div rbx             ;rax = remeinder 4 digi
 
     mov qword[div_rem], rax
