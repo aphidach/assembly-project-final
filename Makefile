@@ -1,3 +1,7 @@
+mainf:
+	yasm -f elf64 -g dwarf2 -o main.o main.asm
+	ld -o main main.o
+	gdb ./main
 convertf:
 	yasm -f elf64 -g dwarf2 -o convert.o convert.s
 	ld -o convert convert.o

@@ -15,8 +15,8 @@ section .data
 section .text
 _start:
     mov rdx, 0
-    mov rax, 589    ;dividend
-    mov rbx, 7      ;divisor
+    mov rax, 100    ;dividend
+    mov rbx, 4    ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
