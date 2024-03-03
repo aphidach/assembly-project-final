@@ -11,13 +11,18 @@ section .data
     dot db "."
     ENDLINE db "",10
     four_zero db "0000",10
-    const10 dq 10
+
+extern printNumber
 
 section .text
+;
+;
+;
 _start:
-    mov rdx, 0
-    mov rax, 100    ;dividend
-    mov rbx, 4      ;divisor
+
+    xor rdx, rdx    ;clear rdx for div rax only
+    mov rax, 666    ;dividend
+    mov rbx, 7      ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
@@ -84,31 +89,4 @@ showresult:
     mov rsi, four_zero
     mov rdx, 5
     syscall 
-    ret
-
-printNumber:
-    push rax
-    push rdx
-    xor rdx, rdx        ;clear rdx
-    div qword[const10]  ;rax = quotient, rdx = remainder
-    test rax, rax       ;== quotient zero?
-    je .char_convert    
-    call printNumber    ;Display the quotient
-.char_convert  :
-    lea rax, [rdx + '0']      ;rax = rdx + '0' //number to ascii
-    call print_character    ;Display the remainder
-    pop rdx
-    pop rax
-    ret
-
-print_character:
-    push rax            ;push the Character in stack
-
-    mov rax, SYS_write
-    mov rdi, STDOUT
-    mov rsi, rsp        ;rsi = address of Character 
-    mov rdx, 1
-    syscall
-
-    pop rax 
     ret
