@@ -18,19 +18,23 @@ section .text
 ;
 ;
 div_4:
-    push rax
-    push rdx
-    push rbx
+    ; push rax
+    ; push rdx
+    ; push rbx
 
     xor rdx, rdx    ;clear rdx for div rax only
     mov rax, 100    ;dividend
     mov rbx, 4      ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
-    
-    pop rbx
-    pop rdx
-    pop rax
+
+    ; pop rbx
+    ; pop rdx
+    ; pop rax
+    mov rax, 60
+    mov rdi, 0
+    syscall
+
 
 div_result:
     push rax
