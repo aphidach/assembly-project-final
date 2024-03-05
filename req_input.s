@@ -35,9 +35,6 @@ section .text
 ;
 ;
 
-global req_input
-req_input:
-
 global print_start_msg
 print_start_msg:
     mov rax, SYS_write
@@ -142,7 +139,6 @@ error_input:
 
     call exit_program
 
-global exit_program
 exit_program:
     mov rax, 60
     mov rdi, 0
