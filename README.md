@@ -15,18 +15,44 @@ This assembly code is a simple calculator program written in x86_64 assembly lan
 3. **Linker (LD):** The LD (GNU Linker) is required to link the assembled code.
 
 ## Instructions
-
-1. Compile the assembly code using an appropriate assembler.
+**In easy way**
+1. 1 Compile the assembly code using an appropriate assembler by using script.And it will run program auto for the first time.
 
 ```bash
-yasm -f elf64 -g dwarf2 -o main.o main.asm
-ld -o main main.o
+$ sh compile_run.sh 
+```
+
+1. 2 If compile finish you can only run file by run without compile. 
+
+```bash
+$ sh ./div_new
+```
+2. Enter the two integer numbers when prompted.
+
+```bash
+==== start!!! ====
+Enter Number 1: <number>
+Enter Number 2
+```
+
+**Optional**
+1. Compile the assembly code using an appropriate assembler.
+* It's include debug mode
+
+```bash
+$ yasm -f elf64 -g dwarf2 -o req_input.o req_input.s
+
+$ yasm -f elf64 -g dwarf2 -o printNumber.o printNumber.s
+
+$ yasm -f elf64 -g dwarf2 -o main.o main.s
+
+$ ld -o div_new main.o printNumber.o req_input.o
 ```
 
 2. Run the compiled executable.
 
  ```bash
-  ./main
+  $ ./div_new
  ```
 
 3. Enter the two integer numbers when prompted.
