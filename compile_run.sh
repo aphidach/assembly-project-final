@@ -1,13 +1,13 @@
-echo yasm req_input
+echo do yasm req_input
 yasm -f elf64 -o req_input.o req_input.s
 
-echo yasm printNumber
+echo do yasm printNumber
 yasm -f elf64 -o printNumber.o printNumber.s
 
-echo yasm main
+echo do yasm main
 yasm -f elf64 -o main.o main.s
 
-echo linkfile
+echo do linkfile
 ld -o div_new main.o printNumber.o req_input.o
 
 echo "---------------- run file ----------------"
