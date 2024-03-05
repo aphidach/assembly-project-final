@@ -11,8 +11,8 @@ This assembly code is a simple calculator program written in x86_64 assembly lan
 ## Requirements
 
 1. **Linux Operating System:** This code is specifically designed for 64-bit Linux systems.
-2. **Assembler (YASM):** You need YASM (Yet Another Assembler) to assemble the code. (install `sudo apt install yasm` )
-3. **Linker (LD):** The LD (GNU Linker) is required to link the assembled code.
+2. **Assembler (YASM):** You need YASM (Yet Another Assembler) to assemble the code. (install `sudo apt install yasm` or `sudo pacman -S yasm` )
+3. **Linker (LD):** The LD (GNU Linker) is required to link the assembled code.(install `sudo apt install gcc` or `sudo pacman -S gcc` )
 
 ## Instructions
 **In easy way**
@@ -25,7 +25,7 @@ $ sh compile_run.sh
 1. 2 If compile finish you can only run file by run without compile. 
 
 ```bash
-$ sh ./div_new
+$ ./div_new
 ```
 2. Enter the two integer numbers when prompted.
 
