@@ -47,6 +47,7 @@ print_start_msg:
 
     ret
 
+global print_output_msg
 print_output_msg:
     mov rax, SYS_write
     mov rdi, STDOUT
