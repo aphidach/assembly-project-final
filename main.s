@@ -13,6 +13,7 @@ section .data
     four_zero db "0000",10
 
 extern print_start_msg
+extern print_output_msg
 extern get_numOne
 extern get_numTwo
 
@@ -57,6 +58,8 @@ div_result:
     mov qword[div_rem], rax
     ;Result  qword[div_ANS].qword[div_rem]
 
+    ;print "Output = "
+    call print_output_msg
     ;1's arugment is qword[div_ANS]
     ;2's arugment is qword[div_rem]
     call showresult ;call subroutine to display result 
