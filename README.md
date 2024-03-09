@@ -40,13 +40,13 @@ Enter Number 2
 * It's include debug mode
 
 ```bash
-$ yasm -f elf64 -g dwarf2 -o req_input.o req_input.s
+$ yasm -f elf64 -g dwarf2 -o ./dotOfile/req_input.o req_input.s
 
-$ yasm -f elf64 -g dwarf2 -o printNumber.o printNumber.s
+$ yasm -f elf64 -g dwarf2 -o ./dotOfile/printNumber.o printNumber.s
 
-$ yasm -f elf64 -g dwarf2 -o main.o main.s
+$ yasm -f elf64 -g dwarf2 -o ./dotOfile/main.o main.s
 
-$ ld -o div_new main.o printNumber.o req_input.o
+$ ld -o div_new ./dotOfile/main.o ./dotOfile/printNumber.o ./dotOfile/req_input.o
 ```
 
 2. Run the compiled executable.
