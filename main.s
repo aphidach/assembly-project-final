@@ -83,6 +83,7 @@ showresult:
 
     ;console remainder
     mov rax, qword[div_rem]
+    call zero_precheck
     cmp rax, 0              ;if remainder == 0 jump to console "0000"
     je .case_zero
     mov rdx, 0
@@ -100,4 +101,8 @@ showresult:
     mov rsi, four_zero
     mov rdx, 5
     syscall 
+    ret
+
+
+zero_precheck:
     ret
