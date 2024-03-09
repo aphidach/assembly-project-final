@@ -11,6 +11,7 @@ section .data
     dot db "."
     ENDLINE db "",10
     four_zero db "0000",10
+    const10 dq 10
 
 extern print_start_msg
 extern print_output_msg
@@ -106,23 +107,37 @@ showresult:
 zero_precheck:
     push rax
     push rbx
+    push rdx
 
-    mov rbx, 9999
-.zero_runC
-    idiv rbx, 10
-    test rbx, rbx
-    je .endCheck
+    mov rbx, rax
+    mov rax, 9999
 
-    cmp rax, rbx
-    jg .endCheck
     mov rax, SYS_write
     mov rdi, STDOUT
-    mov rsi, "0"
-    mov rdx, 5
+    mov rsi, "A"
+    mov rdx, 1
     syscall 
+
+.zero_runC
+    xor rdx, rdx
+    div qword[const10]
+    test rax, rax
+    je .endCheck
+
+    cmp rbx, rax
+    jg .endCheck
+
+    push rax
+    mov rax, SYS_write
+    mov rdi, STDOUT
+    mov rsi, "A"
+    mov rdx, 1
+    syscall 
+    pop rax
     jmp .zero_runC
 
 .endCheck
+    pop rdx
     pop rbx
     pop rax
     ret
