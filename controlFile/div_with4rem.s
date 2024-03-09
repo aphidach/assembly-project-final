@@ -93,14 +93,14 @@ zero_precheck:
     push rbx
     push rdx
 
-    test rax, rax
+    test rax, rax   ;rax == 0?
     je .endCheck
 
-    mov rbx, rax
-    mov rax, 9999
+    mov rbx, rax    ;swap
+    mov rax, 9999   ;start 4 digi
 
 .zero_runC
-    xor rdx, rdx
+    xor rdx, rdx    ;clear
     div qword[const10]
     test rax, rax
     je .endCheck
