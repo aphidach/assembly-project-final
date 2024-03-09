@@ -37,15 +37,15 @@ div_result:
     mov qword[div_ANS], rax
 
     mov rax, rdx        ;for find rem by div
-    imul rax, 10000     ;for calculate 4 point floting
+    imul rax, 10000     ;for calculate 4 point floating
     xor rdx, rdx        ;clear rdx for div rax only
     div rbx             ;rax = remeinder 4 digi
 
     mov qword[div_rem], rax
     ;Result  qword[div_ANS].qword[div_rem]
 
-    ;1's arugment is qword[div_ANS]
-    ;2's arugment is qword[div_rem]
+    ;1's argument is qword[div_ANS]
+    ;2's argument is qword[div_rem]
     call showresult ;call subroutine to display result 
 
     pop rbx
