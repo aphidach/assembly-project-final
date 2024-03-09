@@ -37,7 +37,7 @@ div_result:
     mov qword[div_ANS], rax
 
     mov rax, rdx        ;for find rem by div
-    imul rax, 10000     ;for calculate 4 point floting
+    imul rax, 10000     ;for calculate 4 point floating
     xor rdx, rdx        ;clear rdx for div rax only
     div rbx             ;rax = remeinder 4 digi
 
