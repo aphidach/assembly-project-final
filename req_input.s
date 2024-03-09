@@ -31,9 +31,8 @@ section .data
     input_buffer resd 0
 
 section .text
-;
-;
-;
+;can print start msg and end msg
+;this can get the user input and return int pass rax
 
 global print_start_msg
 print_start_msg:
