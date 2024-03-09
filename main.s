@@ -103,6 +103,26 @@ showresult:
     syscall 
     ret
 
-
 zero_precheck:
+    push rax
+    push rbx
+
+    mov rbx, 9999
+.zero_runC
+    idiv rbx, 10
+    test rbx, rbx
+    je .endCheck
+
+    cmp rax, rbx
+    jg .endCheck
+    mov rax, SYS_write
+    mov rdi, STDOUT
+    mov rsi, "0"
+    mov rdx, 5
+    syscall 
+    jmp .zero_runC
+
+.endCheck
+    pop rbx
+    pop rax
     ret
