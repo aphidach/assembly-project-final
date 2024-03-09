@@ -11,13 +11,14 @@ section .data
     dot db "."
     ENDLINE db "",10
     four_zero db "0000",10
+    zero db "0"
     const10 dq 10
 
 section .text
 _start:
     mov rdx, 0
-    mov rax, 100    ;dividend
-    mov rbx, 4      ;divisor
+    mov rax, 123   ;dividend
+    mov rbx, 4444     ;divisor
     div rbx         ;rax = quotient, rdx = remainder
     call div_result ;call subroutine to display result 
 
@@ -67,6 +68,7 @@ showresult:
 
     ;console remainder
     mov rax, qword[div_rem]
+    call zero_precheck      ;check if remainder has 0 prefix
     cmp rax, 0              ;if remainder == 0 jump to console "0000"
     je .case_zero
     mov rdx, 0
@@ -111,4 +113,40 @@ print_character:
     syscall
 
     pop rax 
+    ret
+
+
+zero_precheck:
+    push rax
+    push rbx
+    push rdx
+
+    test rax, rax
+    je .endCheck
+
+    mov rbx, rax
+    mov rax, 9999
+
+.zero_runC
+    xor rdx, rdx
+    div qword[const10]
+    test rax, rax
+    je .endCheck
+
+    cmp rbx, rax
+    jg .endCheck
+
+    push rax
+    mov rax, SYS_write
+    mov rdi, STDOUT
+    mov rsi, zero
+    mov rdx, 1
+    syscall 
+    pop rax
+    jmp .zero_runC
+
+.endCheck
+    pop rdx
+    pop rbx
+    pop rax
     ret

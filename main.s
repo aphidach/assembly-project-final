@@ -12,6 +12,7 @@ section .data
     ENDLINE db "",10
     four_zero db "0000",10
     const10 dq 10
+    zero db "0"
 
 extern print_start_msg
 extern print_output_msg
@@ -84,7 +85,7 @@ showresult:
 
     ;console remainder
     mov rax, qword[div_rem]
-    call zero_precheck
+    call zero_precheck      ;check if remainder has 0 prefix
     cmp rax, 0              ;if remainder == 0 jump to console "0000"
     je .case_zero
     mov rdx, 0
@@ -109,14 +110,11 @@ zero_precheck:
     push rbx
     push rdx
 
+    test rax, rax
+    je .endCheck
+
     mov rbx, rax
     mov rax, 9999
-
-    mov rax, SYS_write
-    mov rdi, STDOUT
-    mov rsi, "A"
-    mov rdx, 1
-    syscall 
 
 .zero_runC
     xor rdx, rdx
@@ -130,7 +128,7 @@ zero_precheck:
     push rax
     mov rax, SYS_write
     mov rdi, STDOUT
-    mov rsi, "A"
+    mov rsi, zero
     mov rdx, 1
     syscall 
     pop rax
