@@ -11,13 +11,14 @@ section .data
     dot db "."
     ENDLINE db "",10
     four_zero db "0000",10
+    zero db "0"
+    const10 dq 10
 
 extern print_start_msg
 extern print_output_msg
 extern get_numOne
 extern get_numTwo
 
-extern zero_precheck
 extern printNumber
 
 section .text
@@ -102,4 +103,45 @@ showresult:
     mov rsi, four_zero
     mov rdx, 5
     syscall 
+    ret
+
+
+;use to check zer prefix
+;req in pass rax
+;the rangeZero varible use to choose rage for example 
+;rax = 9999 output is 0000 000x 00xx 0xxx xxxx
+;rax = 999 output is 000 00x 0xx xxx
+zero_precheck:
+    push rax
+    push rbx
+    push rdx
+
+    test rax, rax               ;rax == 0?
+    je .endCheck
+
+    mov rbx, rax                ;swap
+    mov rax, 9999               ;start 4 digi
+
+.zero_runC
+    xor rdx, rdx                ;clear
+    div qword[const10]
+    test rax, rax
+    je .endCheck
+
+    cmp rbx, rax
+    jg .endCheck
+
+    push rax
+    mov rax, SYS_write
+    mov rdi, STDOUT
+    mov rsi, zero
+    mov rdx, 1
+    syscall 
+    pop rax
+    jmp .zero_runC
+
+.endCheck
+    pop rdx
+    pop rbx
+    pop rax
     ret
