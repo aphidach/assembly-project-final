@@ -32,7 +32,7 @@ $ ./div_new
 ```bash
 ==== start!!! ====
 Enter Number 1: <number>
-Enter Number 2
+Enter Number 2: <number>
 ```
 
 **Optional**
